@@ -1,0 +1,32 @@
+syntax = "proto3";
+
+package streaming;
+
+option go_package = "github.com/tokai-son/StreamingDemo";
+
+// 動画のクオリティ
+enum VideoQuality {
+  LOW = 0;
+  MEDIUM = 1;
+  HIGH = 2;
+}
+
+// 動画ストリームのリクエスト
+message StreamRequest {
+  string videoID = 1;
+  uint64 startTime = 2; // 再生位置(sec)
+  VideoQuality quality = 3;
+}
+
+// 動画ストリームのレスポンス
+message StreamResponse {
+  bytes chunkData = 1;
+  uint64 chunkSize = 2;
+  uint64 sequence = 3;
+  bool endOfStream = 4;
+}
+
+// 双方向ストリーミング
+service VideoStreamService {
+  rpc StreamVideo(stream StreamRequest) returns (stream StreamResponse);
+}
