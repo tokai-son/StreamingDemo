@@ -3,6 +3,7 @@ module github.com/tokai-son/StreamingDemo
 go 1.23.3
 
 require (
+	gocv.io/x/gocv v0.39.0
 	google.golang.org/grpc v1.68.0
 	google.golang.org/protobuf v1.35.2
 )
